@@ -10,9 +10,6 @@ export default function Home() {
         <Link to={`/categories`}>Categories</Link>
       </li>
       <li>
-        <Link to={`/login`}>Login Page</Link>
-      </li>
-      <li>
         <Link to={`/products`}>Product List</Link>
       </li>
       <li>
@@ -23,9 +20,6 @@ export default function Home() {
       </li>
       <li>
         <Link to={`/products/edit/39`}>Edit Product</Link>
-      </li>
-      <li>
-        <Link to={`/register`}>Register Page</Link>
       </li>
       <li>
         <Link to={`/not-found`}>Not Found (404) Page</Link>
