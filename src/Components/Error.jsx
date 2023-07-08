@@ -1,7 +1,7 @@
-export default function Error() {
+export default function Error(props) {
   return (
     <div>
-      <h1>ERROR!</h1>
+      <h1>ERROR: {props.error.message}</h1>
     </div>
   );
 }
