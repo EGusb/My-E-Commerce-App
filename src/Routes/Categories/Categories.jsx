@@ -1,10 +1,10 @@
 import Category from "./components/Category";
-import useCategories from "../../Functions/useCategories";
+import { getCategories } from "../../Functions/queries";
 import Error from "../../Components/Error";
 import Loader from "../../Components/Loader";
 
 export default function Categories() {
-  const { data: categories, error, isLoading, isError, isSuccess } = useCategories();
+  const { data: categories, error, isLoading, isError, isSuccess } = getCategories();
 
   return (
     <>

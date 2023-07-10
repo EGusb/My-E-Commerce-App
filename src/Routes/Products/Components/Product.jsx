@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
 
 export default function Product({ product }) {
-  const { id, title, price, description, images, category } = product;
-  console.log(product);
+  const { id, title, price, images, category } = product;
   const [firstImage] = images;
 
   // placeimg.com doesn't work, change it to picsum.photos
@@ -10,16 +9,18 @@ export default function Product({ product }) {
 
   return (
     <div className="col p-2">
-      <div className="card h-100 rounded-5">
-        <img src={imageURL} alt="..." className="p-2 rounded-5 h-75" />
-        <div className="card-body">
-          <h5 className="card-title">{title}</h5>
-          <h6 className="card-title">${price}</h6>
-          <Link to={`/products/${id}`} className="btn btn-dark">
-            View Product
-          </Link>
+      <Link to={`/products/${id}`}>
+        <div className="card h-100 rounded-5">
+          <img src={imageURL} alt="..." className="p-2 rounded-5 h-75" />
+          <div className="card-body">
+            <h5 className="card-title">{title}</h5>
+            <h6 className="card-title text-start">${price}</h6>
+            <h6 className="card-title text-start">
+              Category: {category.id}. {category.name}
+            </h6>
+          </div>
         </div>
-      </div>
+      </Link>
     </div>
   );
 }
