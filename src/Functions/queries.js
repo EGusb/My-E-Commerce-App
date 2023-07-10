@@ -32,3 +32,18 @@ export function getProducts(filter) {
   });
   return query;
 }
+
+export function getProductDetail(id) {
+  const query = useQuery([QUERY_KEY_PRODUCTS, id], async () => {
+    const urlFetch = id ? URL_PRODUCTS + "/" + id : URL_PRODUCTS;
+    const res = await fetch(urlFetch);
+    const json = await res.json();
+
+    if (json.error) {
+      throw new Error(json.error);
+    }
+
+    return json;
+  });
+  return query;
+}
