@@ -1,9 +1,10 @@
 import { NavLink } from "react-router-dom";
+import "./styles.css";
 
 function NavItem({ to, children }) {
   return (
     <li className="nav-item p-2">
-      <NavLink to={to}>{children}</NavLink>
+      <NavLink to={to} className="navlink">{children}</NavLink>
     </li>
   );
 }
