@@ -2,6 +2,10 @@ li {
   list-style-type: none;
 }
 
+.navbar {
+  background-color: #212529;
+}
+
 .navlink {
   color: cornsilk;
 }

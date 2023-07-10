@@ -4,14 +4,16 @@ import "./styles.css";
 function NavItem({ to, children }) {
   return (
     <li className="nav-item p-2">
-      <NavLink to={to} className="navlink">{children}</NavLink>
+      <NavLink to={to} className="navlink">
+        {children}
+      </NavLink>
     </li>
   );
 }
 
 function Nav() {
   return (
-    <nav className="navbar navbar-expand-sm">
+    <nav className="navbar navbar-expand-sm sticky-top">
       <div className="container-fluid">
         <ul className="navbar-nav">
           <NavItem to="/">Home</NavItem>
