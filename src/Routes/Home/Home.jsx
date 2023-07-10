@@ -13,13 +13,7 @@ export default function Home() {
         <Link to={`/products`}>Product List</Link>
       </li>
       <li>
-        <Link to={`/products/57`}>Product Detail</Link>
-      </li>
-      <li>
         <Link to={`/products/create`}>Create a Product</Link>
-      </li>
-      <li>
-        <Link to={`/products/edit/39`}>Edit Product</Link>
       </li>
       <li>
         <Link to={`/not-found`}>Not Found (404) Page</Link>
