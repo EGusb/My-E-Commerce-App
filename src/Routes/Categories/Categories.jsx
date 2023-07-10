@@ -1,5 +1,5 @@
 import Category from "./components/Category";
-import useCategories from "./Functions/queries";
+import useCategories from "../../Functions/useCategories";
 import Error from "../../Components/Error";
 import Loader from "../../Components/Loader";
 
