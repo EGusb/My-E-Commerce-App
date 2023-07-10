@@ -1,3 +1,4 @@
+import "./index.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { QueryClientProvider, QueryClient } from "react-query";
 import CartDetail from "./Routes/CartDetail/CartDetail";
