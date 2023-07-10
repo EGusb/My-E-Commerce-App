@@ -3,6 +3,10 @@ body {
   color: cornsilk;
 }
 
+a {
+  text-decoration: none;
+}
+
 .card {
   background-color: darkgrey;
 }
