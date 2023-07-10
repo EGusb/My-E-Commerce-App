@@ -6,7 +6,7 @@ import Loader from "../../Components/Loader";
 import { useState } from "react";
 
 export default function Products() {
-  const search = useLocation().search; // i.e.: '?categoryId=4'
+  const search = useLocation().search; // i.e.: '?categoryId=4&price=820'
   const [filter, setFilter] = useState(search);
   const { data: products, error, isLoading, isError, isSuccess } = getProducts(filter);
 
