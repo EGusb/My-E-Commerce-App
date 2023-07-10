@@ -3,10 +3,14 @@ import Product from "./Components/Product";
 import { getProducts } from "../../Functions/queries";
 import Error from "../../Components/Error";
 import Loader from "../../Components/Loader";
+import { useState } from "react";
 
 export default function Products() {
-  const queryParamsString = new URLSearchParams(useLocation().search).toString();
-  const { data: products, error, isLoading, isError, isSuccess } = getProducts(queryParamsString);
+  const search = useLocation().search; // i.e.: '?categoryId=4'
+  const [filter, setFilter] = useState(search);
+  const { data: products, error, isLoading, isError, isSuccess } = getProducts(filter);
+
+  filter !== search && setFilter(search);
 
   return (
     <>
