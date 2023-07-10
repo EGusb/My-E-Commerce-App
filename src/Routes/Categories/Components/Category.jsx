@@ -7,8 +7,8 @@ export default function Category(props) {
 
   return (
     <div className="col p-2">
-      <div className="card rounded-5">
-        <img src={imageURL} alt="..." className="p-2 rounded-5" />
+      <div className="card h-100 rounded-5">
+        <img src={imageURL} alt="..." className="p-2 rounded-5 h-75" />
         <div className="card-body">
           <h5 className="card-title">{name}</h5>
           <Link to={`/products?categoryId=${id}`} className="btn btn-dark">
