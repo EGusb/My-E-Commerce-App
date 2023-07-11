@@ -40,6 +40,10 @@ export function getProductDetail(id) {
       throw new Error(json.error);
     }
 
+    if (json.name === "EntityNotFoundError") {
+      throw new Error(`${json.name}: ${json.message}`);
+    }
+
     return json;
   });
   return query;
