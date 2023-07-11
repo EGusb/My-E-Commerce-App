@@ -1,7 +1,7 @@
 import { URL_PRODUCTS, QUERY_KEY_PRODUCTS, URL_CATEGORIES, QUERY_KEY_CATEGORIES } from "../Constants/constants";
 import { useQuery } from "react-query";
 
-function getCategories() {
+export function getCategories() {
   const query = useQuery(QUERY_KEY_CATEGORIES, async () => {
     const res = await fetch(URL_CATEGORIES);
     const json = await res.json();
@@ -15,7 +15,7 @@ function getCategories() {
   return query;
 }
 
-function getProducts(filter) {
+export function getProducts(filter) {
   const query = useQuery([QUERY_KEY_PRODUCTS, filter], async () => {
     const urlFetch = filter ? URL_PRODUCTS + filter : URL_PRODUCTS;
     const res = await fetch(urlFetch);
@@ -30,7 +30,7 @@ function getProducts(filter) {
   return query;
 }
 
-function getProductDetail(id) {
+export function getProductDetail(id) {
   const query = useQuery([QUERY_KEY_PRODUCTS, id], async () => {
     const urlFetch = id ? URL_PRODUCTS + "/" + id : URL_PRODUCTS;
     const res = await fetch(urlFetch);
@@ -44,5 +44,3 @@ function getProductDetail(id) {
   });
   return query;
 }
-
-export default { getCategories, getProducts, getProductDetail };
