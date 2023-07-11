@@ -1,10 +1,7 @@
 import { URL_PRODUCTS, QUERY_KEY_PRODUCTS, URL_CATEGORIES, QUERY_KEY_CATEGORIES } from "../Constants/constants";
 import { useQuery } from "react-query";
 
-// To export something as default and not get the error
-export default null;
-
-export function getCategories() {
+function getCategories() {
   const query = useQuery(QUERY_KEY_CATEGORIES, async () => {
     const res = await fetch(URL_CATEGORIES);
     const json = await res.json();
@@ -18,7 +15,7 @@ export function getCategories() {
   return query;
 }
 
-export function getProducts(filter) {
+function getProducts(filter) {
   const query = useQuery([QUERY_KEY_PRODUCTS, filter], async () => {
     const urlFetch = filter ? URL_PRODUCTS + filter : URL_PRODUCTS;
     const res = await fetch(urlFetch);
@@ -33,7 +30,7 @@ export function getProducts(filter) {
   return query;
 }
 
-export function getProductDetail(id) {
+function getProductDetail(id) {
   const query = useQuery([QUERY_KEY_PRODUCTS, id], async () => {
     const urlFetch = id ? URL_PRODUCTS + "/" + id : URL_PRODUCTS;
     const res = await fetch(urlFetch);
@@ -47,3 +44,5 @@ export function getProductDetail(id) {
   });
   return query;
 }
+
+export default { getCategories, getProducts, getProductDetail };
