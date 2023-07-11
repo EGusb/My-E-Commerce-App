@@ -1,0 +1,13 @@
+body {
+  background-color: #212529;
+  color: cornsilk;
+}
+
+a {
+  color: cornsilk;
+  text-decoration: none;
+}
+
+.card {
+  background-color: darkgrey;
+}
