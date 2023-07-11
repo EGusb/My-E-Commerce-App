@@ -11,7 +11,7 @@ export default function Category(props) {
         <img src={imageURL} alt="..." className="p-2 rounded-5 h-75" />
         <div className="card-body">
           <h5 className="card-title">{name}</h5>
-          <Link to={`/products?categoryId=${id}`} className="btn btn-dark">
+          <Link to={`/products?categoryId=${id}`} state={{ categoryId: id }} className="btn btn-dark">
             View Products
           </Link>
         </div>
