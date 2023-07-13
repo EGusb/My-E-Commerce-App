@@ -12,7 +12,7 @@ export default function Detail({ product }) {
           <h3 className="card-title text-start py-2">Category: {category.name}</h3>
           <h5 className="card-title text-start pt-4 py-2 text-decoration-underline">Description:</h5>
           <h5 className="card-title text-start pt-2">{description}</h5>
-          <div className="img-container row py-4">
+          <div className="row py-4">
             {images.map((img) => (
               <img key={img} src={img} alt="..." className="img-detail p-1 rounded-5" />
             ))}
