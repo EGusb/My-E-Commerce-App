@@ -1,13 +1,19 @@
-import { useLocation } from "react-router-dom";
+import { useState } from "react";
 import ProductList from "./Components/ProductList";
+import ProductFilter from "./Components/ProductFilter";
 
 export default function Products() {
-  const search = useLocation().search; // i.e.: '?categoryId=4&price=820'
+  const [filter, setFilter] = useState("");
 
   return (
     <>
       <h1>Products</h1>
-      <ProductList search={search} />
+      <div className="container-fluid">
+        <div className="row">
+          <ProductFilter setFilter={setFilter} />
+          <ProductList filter={filter} />
+        </div>
+      </div>
     </>
   );
 }
