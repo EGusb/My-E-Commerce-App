@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ProductList from "./Components/ProductList";
 import ProductFilter from "./Components/ProductFilter";
+import "./Components/styles.css";
 
 export default function Products() {
   const [filter, setFilter] = useState("");
