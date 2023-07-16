@@ -16,7 +16,7 @@ export function getCategories() {
 }
 
 export function getProducts(filter) {
-  const urlFetch = filter ? URL_PRODUCTS + filter : URL_PRODUCTS;
+  const urlFetch = filter ? URL_PRODUCTS + "?" + filter.replace("?", "") : URL_PRODUCTS;
 
   const query = useQuery([QUERY_KEY_PRODUCTS, filter], async () => {
     const res = await fetch(urlFetch);
