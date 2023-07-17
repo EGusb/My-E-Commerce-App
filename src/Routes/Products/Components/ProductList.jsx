@@ -7,7 +7,6 @@ import { useEffect } from "react";
 
 export default function ProductList(props) {
   const { state } = props;
-
   const [searchParams, setSearchParams] = useSearchParams(state);
   const { data: products, error, isLoading, isError, isSuccess } = getProducts(searchParams.toString());
 
