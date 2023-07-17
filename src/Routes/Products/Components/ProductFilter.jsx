@@ -1,18 +1,17 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import InputField from "./InputField";
 import "./styles.css";
 
 export default function ProductFilter(props) {
-  const { searchParams, setSearchParams } = props;
+  const { state, setState } = props;
 
   const defaultFilterObj = {
-    categoryId: "",
-    title: "",
-    price: "",
-    price_min: "",
-    price_max: "",
+    categoryId: state?.categoryId || "",
+    title: state?.title || "",
+    price: state?.price || "",
+    price_min: state?.price_min || "",
+    price_max: state?.price_max || "",
   };
-
   const [filterObj, setFilterObj] = useState(defaultFilterObj);
 
   function handleChange({ target: { name, value } }) {
@@ -23,25 +22,8 @@ export default function ProductFilter(props) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    // Remove keys from filterObj which are falsy
-    // eslint-disable-next-line no-unused-vars
-    const newFilterObj = Object.fromEntries(Object.entries(filterObj).filter(([_, v]) => Boolean(v)));
-    const searchString = new URLSearchParams(newFilterObj).toString();
-    setSearchParams(searchString);
+    setState(filterObj);
   }
-
-  // Load URL parameter values into filter
-  useEffect(
-    () =>
-      setFilterObj({
-        categoryId: searchParams.get("categoryId") || "",
-        title: searchParams.get("title") || "",
-        price: searchParams.get("price") || "",
-        price_min: searchParams.get("price_min") || "",
-        price_max: searchParams.get("price_max") || "",
-      }),
-    [searchParams]
-  );
 
   return (
     <aside className="col-2 position-fixed mt-4 border rounded-5 py-3">
@@ -105,13 +87,25 @@ export default function ProductFilter(props) {
           />
 
           <div className="container-fluid">
-            <div className="row w-50 mx-auto pb-1 pt-3">
+            <div className="row w-75 mx-auto pb-1 pt-3">
               <button type="submit" className="btn btn-primary col border">
                 Apply filter
               </button>
             </div>
-            <div className="row w-50 mx-auto pt-1 pb-3">
-              <button type="reset" className="btn btn-danger col border" onClick={() => setFilterObj(defaultFilterObj)}>
+            <div className="row w-75 mx-auto pt-1 pb-3">
+              <button
+                type="reset"
+                className="btn btn-danger col border"
+                onClick={() =>
+                  setFilterObj({
+                    categoryId: "",
+                    title: "",
+                    price: "",
+                    price_min: "",
+                    price_max: "",
+                  })
+                }
+              >
                 Clear
               </button>
             </div>
