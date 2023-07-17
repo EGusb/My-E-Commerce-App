@@ -1,5 +1,6 @@
 import { useState } from "react";
 import InputField from "./InputField";
+import objectRemoveBlankValues from "../../../Functions/objectRemoveBlankValues";
 import "./styles.css";
 
 export default function ProductFilter(props) {
@@ -22,7 +23,7 @@ export default function ProductFilter(props) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    setState(filterObj);
+    setState(objectRemoveBlankValues(filterObj));
   }
 
   return (
