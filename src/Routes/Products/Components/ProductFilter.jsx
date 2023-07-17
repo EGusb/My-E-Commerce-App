@@ -35,7 +35,7 @@ export default function ProductFilter(props) {
         <form className="filter-form text-center" onSubmit={handleSubmit}>
           <div className="container-fluid py-3 px-0">
             <select
-              className="form-select select-item bg-secondary text-black"
+              className="form-select d-block m-auto text-center w-75 rounded-5 border bg-secondary text-black"
               key="categoryId"
               id="categoryId"
               name="categoryId"

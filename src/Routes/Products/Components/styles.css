@@ -9,6 +9,12 @@
   height: 2.5rem;
 }
 
+.form-select {
+  font-size: large;
+  font-weight: 600;
+  height: 2.5rem;
+}
+
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
