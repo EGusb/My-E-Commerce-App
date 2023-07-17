@@ -1,11 +1,26 @@
+import { useSearchParams } from "react-router-dom";
 import ProductCard from "./ProductCard";
 import { getProducts } from "../../../Functions/queries";
 import Error from "../../../Components/Error";
 import Loader from "../../../Components/Loader";
+import { useEffect } from "react";
+
+function getUrlStringFromObject(obj) {
+  // Remove keys from filterObj which are falsy
+  // eslint-disable-next-line no-unused-vars
+  const newFilterObj = Object.fromEntries(Object.entries(obj).filter(([_, v]) => Boolean(v)));
+  return new URLSearchParams(newFilterObj).toString();
+}
 
 export default function ProductList(props) {
-  const { searchParams } = props;
+  const { state } = props;
+
+  const [searchParams, setSearchParams] = useSearchParams(getUrlStringFromObject(state));
   const { data: products, error, isLoading, isError, isSuccess } = getProducts(searchParams.toString());
+
+  useEffect(() => {
+    setSearchParams(getUrlStringFromObject(state));
+  }, [state, setSearchParams]);
 
   return (
     <>
