@@ -1,3 +1,4 @@
+import { getCategories } from "../../../Functions/queries";
 import { useState } from "react";
 import InputField from "./InputField";
 import objectRemoveBlankValues from "../../../Functions/objectRemoveBlankValues";
@@ -5,6 +6,7 @@ import "./styles.css";
 
 export default function ProductFilter(props) {
   const { state, setState } = props;
+  const { data: categories, isSuccess } = getCategories();
 
   const defaultFilterObj = {
     categoryId: state?.categoryId || "",
@@ -31,17 +33,32 @@ export default function ProductFilter(props) {
       <div className="sidebar">
         <h1 className="py-2">Filters</h1>
         <form className="filter-form text-center" onSubmit={handleSubmit}>
-          <InputField
-            key="categoryId"
-            id="categoryId"
-            name="categoryId"
-            type="number"
-            placeholder="Category ID"
-            onChange={handleChange}
-            value={filterObj.categoryId}
-            step="1"
-            min="0"
-          />
+          <div className="container-fluid py-3 px-0">
+            <select
+              className="form-select select-item bg-secondary text-black"
+              key="categoryId"
+              id="categoryId"
+              name="categoryId"
+              onChange={handleChange}
+              value={filterObj.categoryId}
+            >
+              <option key="allCategories" value="" className="text-center">
+                All Categories
+              </option>
+              {isSuccess &&
+                categories.map((cat) => {
+                  return (
+                    <option key={cat.id} value={cat.id}>
+                      {cat.id}. {cat.name}
+                    </option>
+                  );
+                })}
+            </select>
+            <label className="pt-1" htmlFor="categoryId">
+              Category
+            </label>
+          </div>
+
           <InputField
             key="price"
             id="price"
@@ -53,6 +70,7 @@ export default function ProductFilter(props) {
             step="0.01"
             min="0"
           />
+
           <InputField
             key="price_min"
             id="price_min"
