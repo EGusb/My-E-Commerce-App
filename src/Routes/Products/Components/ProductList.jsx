@@ -3,16 +3,22 @@ import ProductCard from "./ProductCard";
 import { getProducts } from "../../../Functions/queries";
 import Error from "../../../Components/Error";
 import Loader from "../../../Components/Loader";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function ProductList(props) {
-  const { state } = props;
+  const { state, order } = props;
   const [searchParams, setSearchParams] = useSearchParams(state);
   const { data: products, error, isLoading, isError, isSuccess } = getProducts(searchParams.toString());
+  const [sortedProducts, setSortedProducts] = useState(products || []);
 
   useEffect(() => {
     setSearchParams(state);
   }, [state, setSearchParams]);
+
+  useEffect(() => {
+    products &&
+      setSortedProducts(products.toSorted((a, b) => (a[order.field] > b[order.field] ? order.asc : -order.asc)));
+  }, [products, setSortedProducts, order]);
 
   return (
     <>
@@ -22,7 +28,7 @@ export default function ProductList(props) {
           {isLoading && <Loader />}
           {isError && <Error error={error} />}
           {isSuccess &&
-            products.map((prod) => {
+            sortedProducts.map((prod) => {
               return <ProductCard key={prod.id} product={prod} />;
             })}
         </div>
