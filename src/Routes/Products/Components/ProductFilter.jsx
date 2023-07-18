@@ -5,7 +5,7 @@ import objectRemoveBlankValues from "../../../Functions/objectRemoveBlankValues"
 import "./styles.css";
 
 export default function ProductFilter(props) {
-  const { state, setState } = props;
+  const { state, setState, order, setOrder, defaultOrderObj } = props;
   const { data: categories, isSuccess } = getCategories();
 
   const defaultFilterObj = {
@@ -16,6 +16,14 @@ export default function ProductFilter(props) {
     price_max: state?.price_max || "",
   };
   const [filterObj, setFilterObj] = useState(defaultFilterObj);
+  const [orderObj, setOrderObj] = useState(order);
+
+  function handleOrderByChange({ target: { value } }) {
+    setOrderObj({
+      field: value.split("-")[0],
+      asc: value.split("-")[1] === "asc" ? 1 : -1,
+    });
+  }
 
   function handleChange({ target: { name, value } }) {
     setFilterObj((prevObj) => {
@@ -25,15 +33,55 @@ export default function ProductFilter(props) {
 
   function handleSubmit(event) {
     event.preventDefault();
+    setOrder(orderObj);
     setState(objectRemoveBlankValues(filterObj));
+  }
+
+  function handleReset(event) {
+    event.preventDefault();
+    setFilterObj({
+      categoryId: "",
+      title: "",
+      price: "",
+      price_min: "",
+      price_max: "",
+    });
+    setOrderObj(defaultOrderObj);
   }
 
   return (
     <aside className="col-2 position-fixed mt-4 border rounded-5 py-3">
       <div className="sidebar">
         <h1 className="py-2">Filters</h1>
-        <form className="filter-form text-center" onSubmit={handleSubmit}>
-          <div className="container-fluid py-3 px-0">
+        <form id="filterForm" className="filter-form text-center" onSubmit={handleSubmit} onReset={handleReset}>
+          <div className="container-fluid py-2 px-0">
+            <select
+              className="form-select d-block m-auto text-center w-100 rounded-5 border bg-secondary text-black"
+              key="orderBy"
+              id="orderBy"
+              name="orderBy"
+              onChange={handleOrderByChange}
+              value={`${orderObj.field}-${orderObj.asc === 1 ? "asc" : "desc"}`}
+            >
+              <option key="opt-1" value="title-asc">
+                Title: A-Z
+              </option>
+              <option key="opt-2" value="title-desc">
+                Title: Z-A
+              </option>
+              <option key="opt-3" value="price-asc">
+                Price: Low to High
+              </option>
+              <option key="opt-4" value="price-desc">
+                Price: High to Low
+              </option>
+            </select>
+            <label className="pt-1" htmlFor="orderBy">
+              Order By
+            </label>
+          </div>
+
+          <div className="container-fluid py-2 px-0">
             <select
               className="form-select d-block m-auto text-center w-75 rounded-5 border bg-secondary text-black"
               key="categoryId"
@@ -112,19 +160,7 @@ export default function ProductFilter(props) {
               </button>
             </div>
             <div className="row w-75 mx-auto pt-1 pb-3">
-              <button
-                type="reset"
-                className="btn btn-danger col border"
-                onClick={() =>
-                  setFilterObj({
-                    categoryId: "",
-                    title: "",
-                    price: "",
-                    price_min: "",
-                    price_max: "",
-                  })
-                }
-              >
+              <button type="reset" className="btn btn-danger col border">
                 Clear
               </button>
             </div>
