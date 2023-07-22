@@ -1,8 +1,9 @@
+import { useState } from "react";
 import { useLocation } from "react-router-dom";
+import { ProductsContext } from "./Context/ProductsContext";
 import ProductList from "./Components/ProductList";
 import ProductFilter from "./Components/ProductFilter";
 import "./Components/styles.css";
-import { useState } from "react";
 
 export default function Products() {
   const defaultOrderObj = { field: "title", asc: 1 };
@@ -10,20 +11,14 @@ export default function Products() {
   const [order, setOrder] = useState(defaultOrderObj);
 
   return (
-    <>
-      <h1>Products</h1>
-      <div className="container-fluid">
+    <ProductsContext.Provider value={{ state, setState, order, setOrder, defaultOrderObj }}>
+      <main className="container-fluid">
+        <h1>Products</h1>
         <div className="row">
-          <ProductFilter
-            state={state}
-            setState={setState}
-            order={order}
-            setOrder={setOrder}
-            defaultOrderObj={defaultOrderObj}
-          />
-          <ProductList state={state} order={order} />
+          <ProductFilter />
+          <ProductList />
         </div>
-      </div>
-    </>
+      </main>
+    </ProductsContext.Provider>
   );
 }

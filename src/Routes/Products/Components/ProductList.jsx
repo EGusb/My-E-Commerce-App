@@ -1,12 +1,13 @@
-import { useSearchParams } from "react-router-dom";
-import ProductCard from "./ProductCard";
+import { useContext, useEffect, useState } from "react";
 import { getProducts } from "../../../Functions/queries";
+import { ProductsContext } from "../Context/ProductsContext";
+import { useSearchParams } from "react-router-dom";
 import Error from "../../../Components/Error";
 import Loader from "../../../Components/Loader";
-import { useEffect, useState } from "react";
+import ProductCard from "./ProductCard";
 
-export default function ProductList(props) {
-  const { state, order } = props;
+export default function ProductList() {
+  const { order, state } = useContext(ProductsContext);
   const [searchParams, setSearchParams] = useSearchParams(state);
   const { data: products, error, isLoading, isError, isSuccess } = getProducts(searchParams.toString());
   const [sortedProducts, setSortedProducts] = useState(products || []);
