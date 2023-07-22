@@ -75,51 +75,26 @@ export default function ProductFilter() {
                 return <SelectField.Option key={cat.id} value={cat.id} content={`${cat.id}. ${cat.name}`} />;
               })}
           </SelectField>
-          <InputField
-            key="price"
-            id="price"
-            name="price"
-            type="number"
-            placeholder="Price"
-            onChange={handleChange}
-            value={filterObj.price}
-            step="0.01"
-            min="0"
-          />
+          
+          <InputField name="price" type="number" onChange={handleChange} value={filterObj.price} label="Price" />
 
           <InputField
-            key="price_min"
-            id="price_min"
             name="price_min"
             type="number"
-            placeholder="Minimum price"
             onChange={handleChange}
             value={filterObj.price_min}
-            step="0.01"
-            min="0"
+            label="Minimum price"
           />
 
           <InputField
-            key="price_max"
-            id="price_max"
             name="price_max"
             type="number"
-            placeholder="Maximum price"
             onChange={handleChange}
             value={filterObj.price_max}
-            step="0.01"
-            min="0"
+            label="Maximum price"
           />
 
-          <InputField
-            key="title"
-            id="title"
-            name="title"
-            type="text"
-            placeholder="Title"
-            onChange={handleChange}
-            value={filterObj.title}
-          />
+          <InputField name="title" type="text" onChange={handleChange} value={filterObj.title} label="Title" />
 
           <div className="container-fluid">
             <div className="row w-75 mx-auto pb-1 pt-3">
