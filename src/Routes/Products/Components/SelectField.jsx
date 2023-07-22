@@ -7,7 +7,6 @@ function SelectField(props) {
     <div className="container-fluid py-2 px-0">
       <select
         className="form-select d-block m-auto text-center w-75 rounded-5 border bg-secondary text-black"
-        key={props.name}
         id={props.name}
         name={props.name}
         onChange={props.onChange}
