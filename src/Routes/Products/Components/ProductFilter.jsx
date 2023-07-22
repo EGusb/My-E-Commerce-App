@@ -28,7 +28,7 @@ export default function ProductFilter() {
     });
   }
 
-  function handleChange({ target: { name, value } }) {
+  function handleInputChange({ target: { name, value } }) {
     setFilterObj((prevObj) => {
       return { ...prevObj, [name]: value };
     });
@@ -66,7 +66,7 @@ export default function ProductFilter() {
         <SelectField.Option value="price-desc" content="Price: High to Low" />
       </SelectField>
 
-      <SelectField name="categoryId" onChange={handleChange} value={`${filterObj.categoryId}`} label="Category">
+      <SelectField name="categoryId" onChange={handleInputChange} value={`${filterObj.categoryId}`} label="Category">
         <SelectField.Option key="allCategories" value="" content="All Categories" />
         {isSuccess &&
           categories.map((cat) => {
@@ -74,12 +74,12 @@ export default function ProductFilter() {
           })}
       </SelectField>
 
-      <InputField name="price" type="number" onChange={handleChange} value={filterObj.price} label="Price" />
+      <InputField name="price" type="number" onChange={handleInputChange} value={filterObj.price} label="Price" />
 
       <InputField
         name="price_min"
         type="number"
-        onChange={handleChange}
+        onChange={handleInputChange}
         value={filterObj.price_min}
         label="Minimum price"
       />
@@ -87,12 +87,12 @@ export default function ProductFilter() {
       <InputField
         name="price_max"
         type="number"
-        onChange={handleChange}
+        onChange={handleInputChange}
         value={filterObj.price_max}
         label="Maximum price"
       />
 
-      <InputField name="title" type="text" onChange={handleChange} value={filterObj.title} label="Title" />
+      <InputField name="title" type="text" onChange={handleInputChange} value={filterObj.title} label="Title" />
     </FilterForm>
   );
 }
