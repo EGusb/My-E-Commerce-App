@@ -1,11 +1,13 @@
 import { getCategories } from "../../../Functions/queries";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { ProductsContext } from "../Context/ProductsContext";
 import InputField from "./InputField";
+import SelectField from "./SelectField";
 import objectRemoveBlankValues from "../../../Functions/objectRemoveBlankValues";
 import "./styles.css";
 
-export default function ProductFilter(props) {
-  const { state, setState, order, setOrder, defaultOrderObj } = props;
+export default function ProductFilter() {
+  const { state, setState, order, setOrder, defaultOrderObj } = useContext(ProductsContext);
   const { data: categories, isSuccess } = getCategories();
 
   const defaultFilterObj = {
@@ -54,59 +56,25 @@ export default function ProductFilter(props) {
       <div className="sidebar">
         <h1 className="py-2">Filters</h1>
         <form id="filterForm" className="filter-form text-center" onSubmit={handleSubmit} onReset={handleReset}>
-          <div className="container-fluid py-2 px-0">
-            <select
-              className="form-select d-block m-auto text-center w-100 rounded-5 border bg-secondary text-black"
-              key="orderBy"
-              id="orderBy"
-              name="orderBy"
-              onChange={handleOrderByChange}
-              value={`${orderObj.field}-${orderObj.asc === 1 ? "asc" : "desc"}`}
-            >
-              <option key="opt-1" value="title-asc">
-                Title: A-Z
-              </option>
-              <option key="opt-2" value="title-desc">
-                Title: Z-A
-              </option>
-              <option key="opt-3" value="price-asc">
-                Price: Low to High
-              </option>
-              <option key="opt-4" value="price-desc">
-                Price: High to Low
-              </option>
-            </select>
-            <label className="pt-1" htmlFor="orderBy">
-              Order By
-            </label>
-          </div>
+          <SelectField
+            name="orderBy"
+            value={`${orderObj.field}-${orderObj.asc === 1 ? "asc" : "desc"}`}
+            onChange={handleOrderByChange}
+            label="Order By"
+          >
+            <SelectField.Option value="title-asc" content="Title: A-Z" />
+            <SelectField.Option value="title-desc" content="Title: Z-A" />
+            <SelectField.Option value="price-asc" content="Price: Low to High" />
+            <SelectField.Option value="price-desc" content="Price: High to Low" />
+          </SelectField>
 
-          <div className="container-fluid py-2 px-0">
-            <select
-              className="form-select d-block m-auto text-center w-75 rounded-5 border bg-secondary text-black"
-              key="categoryId"
-              id="categoryId"
-              name="categoryId"
-              onChange={handleChange}
-              value={filterObj.categoryId}
-            >
-              <option key="allCategories" value="" className="text-center">
-                All Categories
-              </option>
-              {isSuccess &&
-                categories.map((cat) => {
-                  return (
-                    <option key={cat.id} value={cat.id}>
-                      {cat.id}. {cat.name}
-                    </option>
-                  );
-                })}
-            </select>
-            <label className="pt-1" htmlFor="categoryId">
-              Category
-            </label>
-          </div>
-
+          <SelectField name="categoryId" onChange={handleChange} value={`${filterObj.categoryId}`} label="Category">
+            <SelectField.Option key="allCategories" value="" content="All Categories" />
+            {isSuccess &&
+              categories.map((cat) => {
+                return <SelectField.Option key={cat.id} value={cat.id} content={`${cat.id}. ${cat.name}`} />;
+              })}
+          </SelectField>
           <InputField
             key="price"
             id="price"
