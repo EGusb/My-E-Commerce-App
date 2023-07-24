@@ -13,7 +13,7 @@ function NavItem({ to, children }) {
 
 function Nav() {
   return (
-    <nav className="navbar navbar-expand-sm sticky-top">
+    <nav className="navbar navbar-expand-sm sticky-top bg-black mb-4">
       <div className="container-fluid">
         <ul className="navbar-nav">
           <NavItem to="/">Home</NavItem>

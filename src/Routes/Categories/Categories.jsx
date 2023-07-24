@@ -1,4 +1,4 @@
-import Category from "./components/Category";
+import Category from "./Components/Category";
 import { getCategories } from "../../Functions/queries";
 import Error from "../../Components/Error";
 import Loader from "../../Components/Loader";
